@@ -1,0 +1,22 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: employee-backend
+  namespace: turquoise
+  labels:
+    app: employee-backend
+    app.kubernetes.io/component: employee-backend
+    app.kubernetes.io/instance: employee-backend
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: employee-backend
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
